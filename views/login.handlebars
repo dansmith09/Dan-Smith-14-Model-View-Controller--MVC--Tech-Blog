@@ -1,0 +1,24 @@
+{{!-- username and password form that checks against data base to login --}}
+<div id="loginHidden">
+<h2>Login</h2>
+
+<form class="form login-form" id="loginSignUpForms">
+  <div class="mb-3">
+    <label for="username-login" class="form-label">Username:</label>
+    <input class="form-control" for="username-login" type="username" id="username-login" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">Please enter the username associated with your account</div>
+  </div>
+  <div class="mb-3">
+    <label for="password-login" class="form-label">Password:</label>
+    <input class="form-control" type="password" id="password-login">
+  </div>
+  <div id="loginAlert" class="alert alert-warning" role="alert">
+  We couldn't find an account with the details you provided.<br> <a id="signup-promptBtn" class="alert-link" href="/signUp">Sign up for an account here</a> or check your details and try again
+  </div>
+  <button class="btn btn-primary" id="loginBtn" type="submit">Login</button>
+  <span id="signup-prompt">Don't have an account? <a id="signup-promptBtn2" href="/signUp">Sign Up Here</a></span>
+</form>
+
+</div>
+
+<script src="/js/login.js"></script>

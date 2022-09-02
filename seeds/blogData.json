@@ -1,0 +1,17 @@
+[
+  {
+    "title": "CSS Facts",
+    "content": "Css makes stuff pretty",
+    "user_id": "3"
+  }, 
+  {
+    "title": "HTML Facts",
+    "content": "HTML makes website outlines",
+    "user_id": "2"
+  }, 
+  {
+    "title": "JavaScript Facts",
+    "content": "JavaScript does pretty much everything lol",
+    "user_id": "1"
+  }
+]
