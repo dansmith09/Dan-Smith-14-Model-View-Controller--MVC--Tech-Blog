@@ -2,10 +2,15 @@
 <h2>THIS IS THE HOME PAGE</h2>
 {{#each blogs as |blog|}}
     <div class="blogCard">
+        <div class="blogHeader">
+        <h3>{{blog.title}}</h3>
+        <p>written by {{blog.user_id}} on {{date_created}}</p>
+
+
+        </div>
         <h3>{{blog.title}}</h3>
         {{date_created}}
         <p>{{blog.content}}</p>
-        <p>written by {{blog.user_id}}</p>
     </div>
 {{/each}}
         <p>{{{blogsStringify}}}</p>

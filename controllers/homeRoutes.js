@@ -6,12 +6,9 @@ router.get('/', async (req, res) => {
     try {
         const blogData = await Blog.findAll({})
         const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
-        blogStringify = JSON.stringify(blogs);
 
         res.render('home', {
-            users,
             blogs,
-            blogStringify,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
