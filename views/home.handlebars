@@ -1,2 +1,11 @@
 {{!-- Renders all existing blog posts --}}
 <h2>THIS IS THE HOME PAGE</h2>
+{{#each blogs as |blog|}}
+    <div class="blogCard">
+        <h3>{{blog.title}}</h3>
+        {{date_created}}
+        <p>{{blog.content}}</p>
+        <p>written by {{blog.user_id}}</p>
+    </div>
+{{/each}}
+        <p>{{{blogsStringify}}}</p>

@@ -4,17 +4,14 @@ const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        const userData = await User.findAll({
-            include: [
-                {
-                    model: Blog,
-                    attributes: ['title', 'content'],
-                }
-            ]
-        })
-        const users = userData.map((users) => users.get({ plain: true }));
+        const blogData = await Blog.findAll({})
+        const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
+        blogStringify = JSON.stringify(blogs);
+
         res.render('home', {
             users,
+            blogs,
+            blogStringify,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
@@ -38,6 +35,15 @@ router.get('/signup', (req, res) => {
       return;
     }
     res.render('signUp');
+});
+
+// route to get all blogs
+router.get('/', async (req, res) => {
+    const blogData = await Blog.findAll().catch((err) => { 
+        res.json(err);
+      });
+        const blogs = blogData.map((blog) => blog.get({ plain: true }));
+        res.render('home', { blogs });
 });
 
 module.exports = router;
