@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const { User, Blog } = require('../models');
+const { User, Blog, Comments} = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
     try {
-        const blogData = await Blog.findAll({})
+        const blogData = await Blog.findAll({ include: User, Comments })
         const blogs = blogData.map((blogs) => blogs.get({ plain: true }));
 
         res.render('home', {
@@ -26,7 +26,7 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req, res) => {
-    // If the user is already logged in, redirect them to dashboard
+    // If the user is not logged in, redirect them to signUp page
     if (req.session.logged_in) {
       res.redirect('/');
       return;
@@ -34,13 +34,22 @@ router.get('/signup', (req, res) => {
     res.render('signUp');
 });
 
-// route to get all blogs
-router.get('/', async (req, res) => {
-    const blogData = await Blog.findAll().catch((err) => { 
-        res.json(err);
-      });
-        const blogs = blogData.map((blog) => blog.get({ plain: true }));
-        res.render('home', { blogs });
+router.get('/dashboard', (req, res) => {
+    // If the user is already logged in, redirect them to dashboard
+    if (req.session.logged_in) {
+      res.render('dashboard');
+      return;
+    }
+    res.redirect('/signUp');
 });
+
+// route to get all blogs
+// router.get('/', async (req, res) => {
+//     const blogData = await Blog.findAll().catch((err) => { 
+//         res.json(err);
+//       });
+//         const blogs = blogData.map((blog) => blog.get({ plain: true }));
+//         res.render('home', { blogs });
+// });
 
 module.exports = router;

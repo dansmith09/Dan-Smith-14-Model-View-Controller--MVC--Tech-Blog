@@ -1,0 +1,17 @@
+[
+  {
+    "content": "JS is the coolest out of these languages",
+    "user_id": "1",
+    "blog_id": "3"
+  }, 
+  {
+    "content": "JavaScript for life man!",
+    "user_id": "2",
+    "blog_id": "3"
+  }, 
+  {
+    "content": "I tend to agree. JavaScript is da bomb",
+    "user_id": "3",
+    "blog_id": "3"
+  }
+]
