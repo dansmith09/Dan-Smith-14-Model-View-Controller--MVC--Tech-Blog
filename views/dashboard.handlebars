@@ -1,27 +1,71 @@
-<h2>Dashboard</h2>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        color: black; 
+        text-decoration: none;
+    }
+    .blogCard {
+        margin: 10px;
+        padding: 5px;
+        border: 3px black solid;
+        border-radius: 10px;
+    }
+    
+    h3 {
+        margin-bottom: 0;
+    }
+    .blogCard {
+        text-align: center;
+    }
+    .blogHeader {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        border-radius: 10px;
+        background: lightblue;
+    }
+    p {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .footerText {
+        font-size: smaller;
+    }
+</style>
+<h2>Dashboard {{blogs.length}}</h2>
 
-<div class="row">
-  <div class="col-auto">
-    <h2>Welcome, {{name}}!</h2>
-  </div>
+<h4>Hi, {{username}}!</h4>
+{{#if blogs.length}}
+<h5>You have made {{blogs.length}} posts.</h5>
+<a href="#blog-title">Click here to make another blog post</a>
+{{else}}
+<h5>You haven't made any posts.</h5>
+{{/if}}
+
+{{#each blogs as |blog|}}
+<div class="blogCard">
+    <a href="/blog/{{blog.id}}">
+        <div class="blogHeader">
+            <h3>{{blog.title}}</h3>
+        </div>
+        <p>{{blog.content}}</p>
+        <p class="footerText">Created by you on {{ format_date blog.date_created}}</p> 
+    </a>
+        <button class="deletebutton" data-id="{{blog.id}}">Delete Blog</button>
+        <button data-id="{{blog.id}}">Update Blog</button>
 </div>
+{{/each}}
 
-<div class="row mt-4">
-  <div class="col-md-6">
-    <h3>Create a New Blog</h3>
-
-    <form class="form new-project-form">
+    <form class="form new-blog-form">
       <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
+        <label for="blog-title">Blog Title: </label>
+        <input class="form-input" type="text" id="blog-title" name="blog-title" />
       </div>
       <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
+        <label for="blog-content">Content:</label>
+        <textarea class="form-input" id="blog-content" name="blog-content"></textarea>
       </div>
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Create</button>
@@ -29,22 +73,4 @@
     </form>
   </div>
 
-  {{#if projects.length}}
-  <div class="col-md-6 project-list">
-    <h3>Current Projects:</h3>
-
-    {{#each projects as |project|}}
-    <div class="row mb-2">
-      <div class="col-md-8">
-        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
-      </div>
-      <div class="col-md-4">
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
-      </div>
-    </div>
-    {{/each}}
-  </div>
-  {{/if}}
-</div>
-
-<script src="./js/profile.js"></script>
+  <script src="/js/dashboard.js"></script>

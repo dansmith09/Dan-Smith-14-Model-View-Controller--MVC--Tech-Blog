@@ -34,16 +34,26 @@ router.get('/signup', (req, res) => {
     res.render('signUp');
 });
 
-router.get('/dashboard', (req, res) => {
-    // Render the dashboard if the user is logged in
-    if (req.session.logged_in) {
-        res.render('dashboard', { logged_in: req.session.logged_in });
-        return;
-    }
-    // If the user is not logged in, redirect them to signUp page
-    res.redirect('/signUp');
-});
+// Use withAuth middleware to prevent access to route
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+      // Find the logged in user based on the session ID
+      const userData = await User.findByPk(req.session.user_id, {
+        attributes: { exclude: ['password'] },
+        include: [{ model: Blog }],
+      });
   
+      const user = userData.get({ plain: true });
+  
+      res.render('dashboard', {
+        ...user,
+        logged_in: true
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
+
 router.get('/blog/:id', async (req, res) => {
     try {
       const blogData = await Blog.findByPk(req.params.id, {
