@@ -44,13 +44,20 @@ router.get('/user', async (req, res) => {
 // Get blog by ID
 router.get('/:id', async (req,res) => {
   try {
-      const blogData = await Blog.findByPk(req.params.id);
+      const blogData = await Blog.findByPk(req.params.id, {
+        include:[
+          {
+            model: User,
+            attributes: ['id','username']
+          }
+        ]
+      });
 
       if (!blogData) {
           res.status(500).json({message: 'No blog entry found with that id!'});
           return;
       }
-      res.status(200).json(quotes);
+      res.status(200).json(blogData);
   } catch(err) {
       res.status(500).json(err);
   }
