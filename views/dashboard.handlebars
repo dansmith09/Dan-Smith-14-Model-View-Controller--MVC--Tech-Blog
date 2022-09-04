@@ -33,6 +33,22 @@
     .footerText {
         font-size: smaller;
     }
+
+    .dashboardButtons {
+        border-radius: 10px;
+        padding: 8px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        margin: 10px
+    }
+    .deletebutton {
+        color: white;
+        background: lightcoral;
+    }
+    .updatebutton {
+        color: white;
+        background: lightsalmon;
+    }
 </style>
 <h2>Dashboard</h2>
 
@@ -53,8 +69,8 @@
         <p>{{blog.content}}</p>
         <p class="footerText">Created by you on {{ format_date blog.date_created}}</p> 
     </a>
-        <button class="deletebutton" data-id="{{blog.id}}">Delete Blog</button>
-        <button data-id="{{blog.id}}">Update Blog</button>
+        <button class="deletebutton dashboardButtons" data-id="{{blog.id}}">Delete Blog</button>
+        <button class="updatebutton dashboardButtons" data-id="{{blog.id}}">Update Blog</button>
 </div>
 {{/each}}
 
