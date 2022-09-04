@@ -41,6 +41,22 @@ router.get('/user', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+      const { id, title, content } = req.body;
+      const blog = await Blog.findByPk(req.params.id);
+      const blogData = await blog.update(
+          {
+              id: id,
+              title: title,
+              content: content
+          });
+          res.status(200).json(blogData)
+  } catch (err){
+      res.status(500).json(err)
+  }
+});
+
 // Get blog by ID
 router.get('/:id', async (req,res) => {
   try {
