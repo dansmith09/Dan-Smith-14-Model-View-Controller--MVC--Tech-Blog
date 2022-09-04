@@ -12,6 +12,9 @@ h1 {
     color: white;
     padding: 10px;
 }
+h2 {
+    text-align: center;
+}
 header a {
     color: lightblue;
     padding: 5px;
@@ -31,6 +34,7 @@ header {
     justify-content: space-between;
     background-color: black;
     border-bottom: lightblue 20px;
+    margin-bottom: 10px;
 }
 ul {
     display: flex;
@@ -42,6 +46,13 @@ ul {
 }
 li {
     margin-right: 5px;
+}
+
+#loginSignUpForms{
+    border: 2px solid #2a2850;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px;
 }
 
 @media screen and (max-width: 495px) {

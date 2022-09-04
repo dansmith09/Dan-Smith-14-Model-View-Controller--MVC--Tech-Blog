@@ -1,5 +1,12 @@
 {{!-- username and password form that checks against data base to login --}}
-<div id="loginHidden">
+
+<style>
+  #loginSignUpForms{
+  border: 2px solid #2a2850;
+  border-radius: 8px;
+  padding: 15px;
+}
+</style>
 <h2>Login</h2>
 
 <form class="form login-form" id="loginSignUpForms">
@@ -18,7 +25,5 @@
   <button class="btn btn-primary" id="loginBtn" type="submit">Login</button>
   <span id="signup-prompt">Don't have an account? <a id="signup-promptBtn2" href="/signUp">Sign Up Here</a></span>
 </form>
-
-</div>
 
 <script src="/js/login.js"></script>
