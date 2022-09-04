@@ -55,6 +55,10 @@ li {
     margin: 10px;
 }
 
+#loginAlert, #signUpAlert {
+    display: none;
+}
+
 @media screen and (max-width: 495px) {
     header {
         flex-direction: column;
