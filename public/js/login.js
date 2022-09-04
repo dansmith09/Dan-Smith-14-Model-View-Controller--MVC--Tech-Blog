@@ -15,7 +15,9 @@ const loginFormHandler = async (event) => {
 
     if (response.ok) {
       // If successful, redirect the browser to the home page
+      // document.location = ('/');
       document.location.replace('/');
+      // changed from this to render logout button on login not on next page load
     } else {
       alert('something went wrong eek');
     }

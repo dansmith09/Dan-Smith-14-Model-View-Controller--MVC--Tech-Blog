@@ -17,39 +17,53 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/login', (req, res) => {
-    // If the user is already logged in, redirect them to dashboard
+    // If the user is already logged in, redirect them to home
     if (req.session.logged_in) {
-      res.redirect('/');
-      return;
+        res.redirect('/');
+        return;
     }
     res.render('login');
 });
 
 router.get('/signup', (req, res) => {
-    // If the user is not logged in, redirect them to signUp page
+    // If the user is already logged in, redirect them to home
     if (req.session.logged_in) {
-      res.redirect('/');
-      return;
+        res.redirect('/');
+        return;
     }
     res.render('signUp');
 });
 
 router.get('/dashboard', (req, res) => {
-    // If the user is already logged in, redirect them to dashboard
+    // Render the dashboard if the user is logged in
     if (req.session.logged_in) {
-      res.render('dashboard');
-      return;
+        res.render('dashboard', { logged_in: req.session.logged_in });
+        return;
     }
+    // If the user is not logged in, redirect them to signUp page
     res.redirect('/signUp');
 });
-
-// route to get all blogs
-// router.get('/', async (req, res) => {
-//     const blogData = await Blog.findAll().catch((err) => { 
-//         res.json(err);
-//       });
-//         const blogs = blogData.map((blog) => blog.get({ plain: true }));
-//         res.render('home', { blogs });
-// });
+  
+router.get('/blog/:id', async (req, res) => {
+    try {
+      const blogData = await Blog.findByPk(req.params.id, {
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+        ],
+      });
+  
+      const blog = blogData.get({ plain: true });
+  
+      res.render('blog', {
+        ...blog,
+        logged_in: req.session.logged_in
+      });
+    } catch (err) {
+      res.status(500).json(err);
+    }
+});
 
 module.exports = router;
