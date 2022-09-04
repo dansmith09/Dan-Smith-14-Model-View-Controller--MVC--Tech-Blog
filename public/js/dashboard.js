@@ -39,8 +39,10 @@ const delButtonHandler = async (event) => {
 document
     .querySelector('.new-blog-form')
     .addEventListener('submit', newFormHandler);
-  
-document
-    .querySelector('.deletebutton')
-    .addEventListener('click', delButtonHandler);
+
+for (let index = 0; index < document.querySelectorAll('.deletebutton')
+.length; index++) {
+    const delButton = document.querySelectorAll('.deletebutton')[index];
+    delButton.addEventListener('click', delButtonHandler);
+}
   
