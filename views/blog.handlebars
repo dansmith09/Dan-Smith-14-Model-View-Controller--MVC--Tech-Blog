@@ -18,9 +18,9 @@
   <p>{{comment.content}}</p>
   <p class="footerText">{{format_date comment.createdAt}}</p>
   {{/each}}
+</div>
 {{/if}}
 
-</div>
 {{#if logged_in}}
 <div class="form-group">
   <textarea data-id="{{id}}" id="comment{{id}}" name="blog-content"></textarea>
