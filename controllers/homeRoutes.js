@@ -57,12 +57,18 @@ router.get('/dashboard', withAuth, async (req, res) => {
 router.get('/blog/:id', async (req, res) => {
     try {
       const blogData = await Blog.findByPk(req.params.id, {
-        include: [
+        include:[
+          {
+            model: Comments, include: {
+              model: User,
+              attributes: ['id', 'username']
+            }
+          },
           {
             model: User,
-            attributes: ['id','username'],
-          },
-        ],
+            attributes: ['id','username']
+          }
+        ]
       });
   
       const blog = blogData.get({ plain: true });

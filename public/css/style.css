@@ -54,9 +54,11 @@ li {
     padding: 15px;
     margin: 10px;
 }
-
 #loginAlert, #signUpAlert {
     display: none;
+}
+.footerText {
+    font-size: smaller;
 }
 
 @media screen and (max-width: 495px) {

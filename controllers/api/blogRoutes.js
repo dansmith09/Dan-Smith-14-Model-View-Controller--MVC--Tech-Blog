@@ -4,6 +4,7 @@ const { Blog, User, Comments } = require('../../models');
 router.post('/', async (req, res) => {
   try {
     const newBlog = await Blog.create({
+      include: [{ model: User}],
       ...req.body,
       user_id: req.session.user_id,
     });
@@ -18,7 +19,7 @@ router.post('/', async (req, res) => {
 router.get('/', async (req, res) => {
   try{
       const blogData = await Blog.findAll({
-          include: [{ model: User, Comments}]
+          include: [ Comments, User ]
       });
       res.status(200).json(blogData);
   } catch(err) {
@@ -62,6 +63,12 @@ router.get('/:id', async (req,res) => {
   try {
       const blogData = await Blog.findByPk(req.params.id, {
         include:[
+          {
+            model: Comments, include: {
+              model: User,
+              attributes: ['id', 'username']
+            }
+          },
           {
             model: User,
             attributes: ['id','username']
