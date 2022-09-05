@@ -14,9 +14,11 @@
 </div>
 {{#if logged_in}}
 <div class="form-group">
-  <textarea data-id="{{id}}" class="commentSection{{blog.id}}" id="comment{{blog.id}}" name="blog-content"></textarea>
+  <textarea data-id="{{id}}" class="commentSection" id="comment{{id}}" name="blog-content"></textarea>
 </div>
-  <button data-id="{{id}}" id="commentButton" class="btn btn-primary">Add Comment</button>
+  <button type="submit" data-id="{{id}}" id="commentButton" class="btn btn-primary commentSection">Add Comment</button>
 {{else}}
   <p> <a href="/login">Login to leave a comment</a></p>
 {{/if}}
+
+<script src="/js/blog.js"></script>

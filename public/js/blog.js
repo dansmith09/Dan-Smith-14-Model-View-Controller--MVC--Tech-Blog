@@ -1,12 +1,11 @@
 const postComment = async (event) => {
     event.preventDefault();
-    alert('in post comment func')
     if (event.target.hasAttribute('data-id')) {
         const blog_id = event.target.getAttribute('data-id');
-        const content = document.querySelector(`#comment${id}`).value;
+        const content = document.querySelector(`#comment${blog_id}`).value;
         
-        if (title && content) {
-            const response = await fetch(`/api/blog/${id}`, {
+        if (content) {
+            const response = await fetch(`/api/comments`, {
               method: 'POST',
               body: JSON.stringify({ content, blog_id  }),
               headers: {
@@ -14,14 +13,14 @@ const postComment = async (event) => {
               },
             });
             if (response.ok) {
-              document.location.replace('/dashboard');
+              window.location.reload();
             } else {
-              alert('Failed to create blog');
+              alert('Failed to post comment');
             }
         }
     }
 }
 
 document
-    .querySelector('.commentSection')
-    .addEventListener('submit', postComment);
+    .querySelector('#commentButton')
+    .addEventListener('click', postComment);
