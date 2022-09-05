@@ -11,9 +11,13 @@
         border: 3px black solid;
         border-radius: 10px;
     }
-    
     h3 {
         margin-bottom: 0;
+    }
+    main h4,
+    main h5,
+    main p{
+        text-align: center;
     }
     .blogCard {
         text-align: center;
@@ -44,10 +48,22 @@
     .deletebutton {
         color: white;
         background: lightcoral;
+        border: none
     }
     .updatebutton {
         color: white;
         background: lightsalmon;
+        border: none
+    }
+    .deletebutton:hover {
+        color: white;
+        background: rgb(235, 95, 95);
+        border: none
+    }
+    .updatebutton:hover {
+        color: white;
+        background: lightsalmon;
+        border: none
     }
     .originallyHidden {
         display: none;
@@ -58,9 +74,9 @@
 <h4>Hi, {{username}}!</h4>
 {{#if blogs.length}}
 <h5>You have made {{blogs.length}} posts.</h5>
-<a href="#blog-title">Click here to make another blog post</a>
+<p><a href="#blog-title">Click here to make another blog post</a></p>
 {{else}}
-<h5>You haven't made any posts.</h5>
+<h5>You haven't made any posts. Make a new one below!</h5>
 {{/if}}
 
 {{#each blogs as |blog|}}
@@ -72,8 +88,8 @@
         <p id="blogContent{{blog.id}}">{{blog.content}}</p>
         <p class="footerText">Created by you on {{ format_date blog.date_created}}</p> 
     </a>
-        <button class="deletebutton dashboardButtons" data-id="{{blog.id}}">Delete Blog</button>
-        <button class="updatebutton dashboardButtons" data-id="{{blog.id}}">Update Blog</button>
+        <button class="btn btn-primary deletebutton dashboardButtons" data-id="{{blog.id}}">Delete Blog</button>
+        <button class="btn btn-primary updatebutton dashboardButtons" data-id="{{blog.id}}">Update Blog</button>
         <form id="update-form{{blog.id}}" class="form originallyHidden">
             <div class="form-group update-blog-form">
                 <label for="update-blog-title">Blog Title: </label>
